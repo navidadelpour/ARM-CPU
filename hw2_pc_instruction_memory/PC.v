@@ -3,16 +3,15 @@ module PC(clock, write, reset, oldpc, newpc);
 	input write;
 	input reset;
 	input [63:0] oldpc;
+
 	output reg [63:0] newpc;
 
 	always @ (posedge clock) begin
 		
-		if(reset) begin
+		if(reset)
 			newpc = 0;
-		end
-		else if(write) begin
+		else if(write)
 			newpc = oldpc;
-		end
 	end
 
 endmodule

@@ -1,10 +1,11 @@
-module clock (output reg clk);
+module Clock (clk);
+
+	output reg clock;
 
 	always
 		begin 
-			#100 clk = 1;
-			#100 clk = 0;
+			#100 clock = 1;
+			#100 clock = 0;
   		end
-
 
 endmodule

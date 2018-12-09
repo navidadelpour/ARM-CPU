@@ -1,3 +1,0 @@
-module PcTestbench ();
-
-	ALU(

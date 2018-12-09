@@ -1,6 +1,8 @@
-module InstructionMemory(address, out);
-	input [4:0] address;
-	output reg [63:0] out;
+module InstructionMemory(input_address, output_data);
+
+	input [4:0] input_address;
+
+	output reg [63:0] output_data;
 
 	reg [63:0] memory [31:0];
 	
@@ -9,6 +11,6 @@ module InstructionMemory(address, out);
 	end
 
 	always @ (*) begin
-		out = memory[address];
+		output_data = memory[input_address];
 	end
 endmodule
