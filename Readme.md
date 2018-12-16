@@ -1,10 +1,6 @@
 # Digital-Design-Lab
-Digital Design Lab homeworks
+Digital Design Lab project
 
-hw1:
+in this project we are trying to make a simple cpu with verilog
 
-in homework1 we included registerbank and clock modules and used simple testbenches to test them.
-
-hw2:
-
-homework2 includes the modules pc and instruction memory and a simple alu
+we are using modelsim as a compiler and simulator
