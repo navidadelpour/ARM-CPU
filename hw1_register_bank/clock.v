@@ -1,4 +1,4 @@
-module Clock (clk);
+module Clock (clock);
 
 	output reg clock;
 
