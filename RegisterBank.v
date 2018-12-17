@@ -11,7 +11,7 @@ module RegisterBank (
 	
 	output[63:0] output_data_1, output_data_2;
 
-	reg [63:0] registers [31:0];
+	reg [63:0] registers [0:31];
 
 	assign output_data_1 = registers[input_address_1];
 	assign output_data_2 = registers[input_address_2];

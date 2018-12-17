@@ -4,7 +4,7 @@ module InstructionMemory(input_address, output_data);
 
 	output [63:0] output_data;
 
-	reg [63:0] memory [31:0];
+	reg [63:0] memory [0:31];
 	
 	initial begin
 		memory[5] = 15;
