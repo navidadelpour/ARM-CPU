@@ -1,13 +1,13 @@
 module RegisterBank (
 	clock, write,
-	input_address_1, input_address_2, input_address_3, input_data_3, 
+	input_address_1, input_address_2, input_address_3, input_data, 
 	output_data_1, output_data_2
 );
 
 	input clock;
 	input write;
 	input [4:0] input_address_1, input_address_2, input_address_3;
-	input [63:0] input_data_3;
+	input [63:0] input_data;
 	
 	output[63:0] output_data_1, output_data_2;
 
@@ -18,7 +18,7 @@ module RegisterBank (
 
 	always @ (posedge clock) begin
 		if(write)
-			registers[input_address_3] = input_data_3;
+			registers[input_address_3] = input_data;
 	end
 endmodule
 	 
