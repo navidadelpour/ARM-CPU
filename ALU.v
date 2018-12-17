@@ -7,9 +7,9 @@ module ALU(input_data_1, input_data_2, input_opcode, output_data, output_zero);
 	output reg[63:0] output_data;
 	output reg[63:0] output_zero;
 
-	always @ (input_data_1, input_data_2) begin
-		output_zero = 0;
+	assign output_zero = output_data == 0 ? 1 : 0;
 
+	always @ (input_data_1, input_data_2, input_opcode) begin
 		case(input_opcode)
 			4'b0010: output_data = input_data_1 + input_data_2;
 			4'b0110: output_data = input_data_1 - input_data_2;
@@ -17,8 +17,6 @@ module ALU(input_data_1, input_data_2, input_opcode, output_data, output_zero);
 			4'b0001: output_data = input_data_1 | input_data_2;
 			4'b0111: output_data = input_data_2;
 			4'b1100: output_data = ~(input_data_1 | input_data_2);
-		default
-			output_data = 0;
 		endcase
 	end
 
