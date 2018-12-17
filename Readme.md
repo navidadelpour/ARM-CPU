@@ -5,6 +5,6 @@ in this project we are trying to make a simple arm cpu with verilog
 
 we are using modelsim as a compiler and simulator
 
-prof mlaali
+professor mlaali
 
-team members saleh26
+team member saleh26
