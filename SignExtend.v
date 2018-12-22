@@ -1,6 +1,5 @@
-module SignExtend(clock, instruction, output_data);
+module SignExtend(instruction, output_data);
 
-	input clock;
 	input [31:0] instruction;
 	output reg [63:0] output_data;
 	wire opcode = instruction[31:30];
