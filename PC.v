@@ -1,16 +1,17 @@
-module PC(clock, write, reset, oldpc, newpc);
+module PC #(parameter n = 64) (clock, reset, oldpc, newpc);
+
 	input clock;
 	input write;
 	input reset;
-	input [63:0] oldpc;
+	input [n - 1 : 0] oldpc;
 
-	output reg [63:0] newpc;
+	output reg [n - 1 : 0] newpc;
 
 	always @ (posedge clock) begin
 		
 		if(reset)
 			newpc = 0;
-		else if(write)
+		else
 			newpc = oldpc;
 	end
 

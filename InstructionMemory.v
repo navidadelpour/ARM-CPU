@@ -1,15 +1,10 @@
-module InstructionMemory(input_address, output_data);
+module InstructionMemory #(parameter n = 64, parameter size = 256) (input_address, output_data);
 
-	input [4:0] input_address;
+	input [n - 1 : 0] input_address;
+	output [n - 1 : 0] output_data;
 
-	output [63:0] output_data;
-
-	reg [63:0] memory [0:31];
+	reg [n - 1 : 0] memory [0 : size - 1];
 	
-	initial begin
-		memory[5] = 15;
-	end
-
 	assign	output_data = memory[input_address];
 
 endmodule

@@ -1,4 +1,4 @@
-module RegisterBank (
+module RegisterBank #(parameter n = 64) (
 	clock, write,
 	input_address_1, input_address_2, input_address_3, input_data, 
 	output_data_1, output_data_2
@@ -6,12 +6,12 @@ module RegisterBank (
 
 	input clock;
 	input write;
-	input [4:0] input_address_1, input_address_2, input_address_3;
-	input [63:0] input_data;
+	input [n - 1 : 0] input_address_1, input_address_2, input_address_3;
+	input [n - 1 : 0] input_data;
 	
-	output[63:0] output_data_1, output_data_2;
+	output[n - 1 : 0] output_data_1, output_data_2;
 
-	reg [63:0] registers [0:31];
+	reg [n - 1 : 0] registers [0 : 31];
 
 	assign output_data_1 = registers[input_address_1];
 	assign output_data_2 = registers[input_address_2];
