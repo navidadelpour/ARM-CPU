@@ -1,12 +1,12 @@
-module ALUControl (ALUOp0, ALUOp1, instruction, operation_code);
+module ALUControl (ALUOp0, ALUOp1, instruction_part, operation_code);
 
     input ALUOp0, ALUOp1;
-    input [31:0] instruction;
+    input [31:0] instruction_part;
     output reg [3:0] operation_code;
 
     wire [1:0] ALUOp = {ALUOp1, ALUOp0}
 
-    always @ (ALUOp0, ALUOp1, instruction) begin
+    always @ (ALUOp0, ALUOp1, instruction_part) begin
 
         casex(ALUOp)
         
@@ -14,7 +14,7 @@ module ALUControl (ALUOp0, ALUOp1, instruction, operation_code);
             2'bx1: operation_code = 4'b0111;
             2'b1x: begin
 
-                casex(instruction[31:21])
+                casex(instruction_part)
                     11'b10001011000: operation_code = 0010;
                     11'b11001011000: operation_code = 0110;
                     11'b10001010000: operation_code = 0000;
