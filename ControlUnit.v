@@ -5,8 +5,11 @@ module ControlUnit (
 );
 
     input [10:0] instruction_part;
-    output reg Reg2Loc, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp1, ALUOp0;
-    wire [8:0] value;
+    output Reg2Loc, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp1, ALUOp0;
+    reg [8:0] value;
+
+    assign {Reg2Loc, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp1, ALUOp0} = value;
+     
 
     always @ (instruction_part) begin
     
@@ -17,7 +20,6 @@ module ControlUnit (
             11'b10110100xxx: value = 9'b10x000101;
         endcase
 
-        {Reg2Loc, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp1, ALUOp0} = value
     end
 
 endmodule

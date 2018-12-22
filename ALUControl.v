@@ -15,10 +15,12 @@ module ALUControl (ALUOp0, ALUOp1, instruction_part, operation_code);
             2'b1x: begin
 
                 casex(instruction_part)
+
                     11'b10001011000: operation_code = 0010;
                     11'b11001011000: operation_code = 0110;
                     11'b10001010000: operation_code = 0000;
                     11'b10101010000: operation_code = 0001;
+                
                 endcase
 
             end
