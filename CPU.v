@@ -1,8 +1,11 @@
 module CPU ();
 
-    PC (
-        .clock(),
-        .write(),
+    wire clock;
+
+    Clock clock_1 (clock);
+
+    PC pc_1 (
+        .clock(clock),
         .reset(),
         .oldpc(),
         .newpc()
@@ -40,7 +43,7 @@ module CPU ();
     )
 
     RegisterBank (
-        .clock(),
+        .clock(clock),
         .write(),
         .input_address_1(),
         .input_address_2(),
@@ -51,7 +54,6 @@ module CPU ();
     );
 
     SignExtend (
-        .clock(), 
         .instruction(), 
         .output()
     );
@@ -99,7 +101,7 @@ module CPU ();
     );
 
     DataMemory (
-        .clock(), 
+        .clock(clock), 
         .write(), 
         .read(), 
         .input_address(), 
