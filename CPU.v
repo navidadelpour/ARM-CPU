@@ -10,8 +10,8 @@ module CPU ();
     PC pc_1 (
         .clock(clock),
         .reset(pc_reset),
-        .newpc(new_pc)
-        .oldpc(old_pc),
+        .newpc(new_pc),
+        .oldpc(old_pc)
     );
 
     Adder pc_adder (
@@ -43,7 +43,7 @@ module CPU ();
         .input_data_2(instruction[4 : 0]),
         .input_select(reg_to_loc),
         .output_data(output_register_bank_multiplexer)
-    )
+    );
 
     RegisterBank register_bank (
         .clock(clock),
@@ -117,4 +117,4 @@ module CPU ();
         .output_data(input_data_register)
     );
 
-endmodule;
+endmodule

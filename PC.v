@@ -1,4 +1,4 @@
-module PC #(parameter n = 64) (clock, reset, newpc, oldpc);
+module PC #(parameter n = 64) (clock, write, reset, newpc, oldpc);
 
 	input clock;
 	input write;

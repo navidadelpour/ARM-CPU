@@ -1,4 +1,4 @@
-module SignExtend(instruction, output_data);
+module SignExtend(clock, instruction, output_data);
 
 	input clock;
 	input [31:0] instruction;

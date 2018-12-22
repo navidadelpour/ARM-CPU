@@ -4,7 +4,7 @@ module ALUControl (ALUOp0, ALUOp1, instruction_part, operation_code);
     input [31:0] instruction_part;
     output reg [3:0] operation_code;
 
-    wire [1:0] ALUOp = {ALUOp1, ALUOp0}
+    wire [1:0] ALUOp = {ALUOp1, ALUOp0};
 
     always @ (ALUOp0, ALUOp1, instruction_part) begin
 

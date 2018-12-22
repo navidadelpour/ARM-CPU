@@ -13,12 +13,12 @@ module DataMemory #(parameter size = 256) (clock, write, read, input_address, in
 		memory[input_address + 3],
 		memory[input_address + 2],
 		memory[input_address + 1],
-		memory[input_address + 0],
-	}
+		memory[input_address + 0]
+	} : 63'bz;
 
 	always @ (posedge clock) begin
 
-		if(write)
+		if(write) begin
 			memory[input_address + 7] = input_data[63 : 56];
 			memory[input_address + 6] = input_data[55 : 48];
 			memory[input_address + 5] = input_data[47 : 40];
@@ -28,6 +28,7 @@ module DataMemory #(parameter size = 256) (clock, write, read, input_address, in
 			memory[input_address + 1] = input_data[15 : 8];
 			memory[input_address + 0] = input_data[7 : 0];
 		
+		end
 	end
 
 endmodule
