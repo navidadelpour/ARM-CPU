@@ -4,7 +4,7 @@ module SignExtend(instruction, output_data);
 	output reg [63:0] output_data;
 	wire opcode = instruction[31:30];
 
-	always @ (clock) begin
+	always @ (instruction) begin
 		case(opcode)
 			2'b11: output_data = {{55{instruction[20]}}, instruction[20:12]};
 			2'b10: output_data = {{45{instruction[23]}}, instruction[23:5]};
