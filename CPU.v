@@ -1,13 +1,20 @@
 module CPU ();
 
-    wire clock, pc_reset, zero_alu, reg_to_loc, alu_src, mem_to_reg, reg_write, mem_read, mem_write, branch, alu_op_1, alu_op_0;
+    wire clock, zero_alu, reg_to_loc, alu_src, mem_to_reg, reg_write, mem_read, mem_write, branch, alu_op_1, alu_op_0;
     wire [5  : 0] output_register_bank_multiplexer, alu_opcode;
     wire [31 : 0] instruction;
     wire [63 : 0] old_pc, new_pc, output_pc_adder, output_data_memory, output_alu, reg_data_1, reg_data_2, output_alu_multiplexer, input_data_register, output_sign_extend, output_shift_unit, output_shift_unit_adder;
 
+    reg pc_reset;
+
+    initial begin
+        #100 pc_reset = 1;
+        #100 pc_reset = 0; 
+    end
+
     Clock clock_1(clock);
 
-    PC pc_1 (
+    PC pc_1 (   
         .clock(clock),
         .reset(pc_reset),
         .newpc(new_pc),

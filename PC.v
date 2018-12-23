@@ -8,7 +8,7 @@ module PC #(parameter n = 64) (clock, reset, newpc, oldpc);
 
 	always @ (posedge clock) begin
 		
-		if(reset)
+		if(reset == 1)
 			oldpc = 0;
 		else
 			oldpc = newpc;
