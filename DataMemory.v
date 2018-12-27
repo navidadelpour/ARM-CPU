@@ -3,6 +3,8 @@ module DataMemory #(parameter size = 256) (clock, write, read, input_address, in
 	input [63 : 0] input_address, input_data;
 	output[63 : 0] output_data;
 
+	integer i;
+
 	reg [7 : 0] memory [0 : size - 1];
 
 	assign output_data = read ? {
@@ -14,7 +16,13 @@ module DataMemory #(parameter size = 256) (clock, write, read, input_address, in
 		memory[input_address + 2],
 		memory[input_address + 1],
 		memory[input_address + 0]
-	} : 63'bz;
+	} : 64'bz;
+
+	initial begin
+		for(i = 0; i < size - 1; i = i + 1)
+			memory[i] = 7;
+
+	end
 
 	always @ (posedge clock) begin
 
