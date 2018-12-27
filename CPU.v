@@ -1,15 +1,18 @@
+`default_nettype none
+
 module CPU ();
 
     wire clock, zero_alu, reg_to_loc, alu_src, mem_to_reg, reg_write, mem_read, mem_write, branch, alu_op_1, alu_op_0;
-    wire [5  : 0] output_register_bank_multiplexer, alu_opcode;
+    wire [3 : 0] alu_opcode;
+    wire [4 : 0] output_register_bank_multiplexer;
     wire [31 : 0] instruction;
     wire [63 : 0] old_pc, new_pc, output_pc_adder, output_data_memory, output_alu, reg_data_1, reg_data_2, output_alu_multiplexer, input_data_register, output_sign_extend, output_shift_unit, output_shift_unit_adder;
 
     reg pc_reset;
 
     initial begin
-        #100 pc_reset = 1;
-        #100 pc_reset = 0; 
+        pc_reset = 1; 
+        #100 pc_reset = 0;
     end
 
     Clock clock_1(clock);
@@ -23,7 +26,7 @@ module CPU ();
 
     Adder pc_adder (
         .input_data_1(old_pc),
-        .input_data_2(4),
+        .input_data_2(64'b100),
         .output_data(output_pc_adder)
     );
 
@@ -45,7 +48,7 @@ module CPU ();
         .ALUOp0(alu_op_0)
     );
 
-    Multiplexer register_bank_multiplexer (
+    Multiplexer # (.n(5)) register_bank_multiplexer (
         .input_data_1(instruction[20 : 16]),
         .input_data_2(instruction[4 : 0]),
         .input_select(reg_to_loc),
@@ -118,8 +121,8 @@ module CPU ();
     );
 
     Multiplexer data_memory_multiplexer (
-        .input_data_1(output_data_memory),
-        .input_data_2(output_alu),
+        .input_data_1(output_alu),
+        .input_data_2(output_data_memory),
         .input_select(mem_to_reg),
         .output_data(input_data_register)
     );
