@@ -5,7 +5,7 @@ module ALU #(parameter n = 64) (input_data_1, input_data_2, input_opcode, output
 	input [3:0] input_opcode;
 
 	output reg[n - 1 : 0] output_data;
-	output [n - 1 : 0] output_zero;
+	output output_zero;
 
 	assign output_zero = output_data == 0 ? 1 : 0;
 
