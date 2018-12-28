@@ -4,9 +4,7 @@ module CPU_Pipelined ();
 
     wire clock, EX_zero_alu, MEM_zero_alu;
 
-    wire reg_to_loc;
-
-    wire ID_reg_to_loc, ID_alu_src, ID_mem_to_reg, ID_reg_write, ID_mem_read, ID_mem_write, ID_branch, ID_alu_op_1, ID_alu_op_0;
+    wire reg_to_loc, ID_alu_src, ID_mem_to_reg, ID_reg_write, ID_mem_read, ID_mem_write, ID_branch, ID_alu_op_1, ID_alu_op_0;
 
     wire EX_alu_src, EX_mem_to_reg, EX_reg_write, EX_mem_read, EX_mem_write, EX_branch, EX_alu_op_1, EX_alu_op_0;
 
@@ -62,7 +60,7 @@ module CPU_Pipelined ();
         .output_data(output_pc_adder)
     );
 
-    InstructionMemory instruction_memory (
+    InstructionMemory #(.pipeline(1)) instruction_memory (
         .input_address(IF_old_pc), 
         .output_data(IF_instruction)
     );
@@ -78,7 +76,7 @@ module CPU_Pipelined ();
 
     ControlUnit control_unit (
         .instruction_part(ID_instruction[31 : 21]),
-        .Reg2Loc(ID_reg_to_loc), 
+        .Reg2Loc(reg_to_loc), 
         .ALUSrc(ID_alu_src), 
         .MemtoReg(ID_mem_to_reg), 
         .RegWrite(ID_reg_write),
