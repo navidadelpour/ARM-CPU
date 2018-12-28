@@ -17,11 +17,11 @@ module CPU ();
 
     Clock clock_1(clock);
 
-    PC pc_1 (   
+    Register pc_1 (   
         .clock(clock),
         .reset(pc_reset),
-        .newpc(new_pc),
-        .oldpc(old_pc)
+        .new_output(new_pc),
+        .old_output(old_pc)
     );
 
     Adder pc_adder (
