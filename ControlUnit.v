@@ -18,6 +18,7 @@ module ControlUnit (
             11'b11111000010: value = 9'b011110000;
             11'b11111000000: value = 9'b110001000;
             11'b10110100xxx: value = 9'b100000101;
+            11'b0          : value = 9'b0;
         endcase
 
     end
