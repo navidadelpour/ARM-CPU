@@ -17,6 +17,15 @@ module CPU ();
 
     Clock clock_1(clock);
 
+
+
+    Multiplexer pc_multiplexer (
+        .input_data_1(output_pc_adder),
+        .input_data_2(output_shift_unit_adder),
+        .input_select(branch & zero_alu),
+        .output_data(new_pc)
+    );
+
     Register pc_1 (   
         .clock(clock),
         .reset(pc_reset),
@@ -34,6 +43,8 @@ module CPU ();
         .input_address(old_pc), 
         .output_data(instruction)
     );
+
+
 
     ControlUnit control_unit (
         .instruction_part(instruction[31 : 21]),
@@ -71,6 +82,8 @@ module CPU ();
         .output_data(output_sign_extend)
     );
 
+
+
     ALUControl alu_control_unit (
         .ALUOp0(alu_op_0),
         .ALUOp1(alu_op_1),
@@ -104,12 +117,7 @@ module CPU ();
         .output_data(output_shift_unit_adder)
     );
 
-    Multiplexer shift_unit_multiplexer (
-        .input_data_1(output_pc_adder),
-        .input_data_2(output_shift_unit_adder),
-        .input_select(branch & zero_alu),
-        .output_data(new_pc)
-    );
+
 
     DataMemory data_memory (
         .clock(clock), 
@@ -119,6 +127,8 @@ module CPU ();
         .input_data(reg_data_2),
         .output_data(output_data_memory)
     );
+
+    
 
     Multiplexer data_memory_multiplexer (
         .input_data_1(output_alu),
