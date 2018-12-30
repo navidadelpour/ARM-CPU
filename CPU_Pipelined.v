@@ -23,10 +23,12 @@ module CPU_Pipelined ();
     wire [63 : 0] EX_output_shift_unit_adder, MEM_output_shift_unit_adder;
 
     wire [3 : 0] alu_opcode;
-    wire [4 : 0] output_register_bank_multiplexer;
-    wire [31 : 0] ID_instruction, IF_instruction, EX_instruction, MEM_instruction, WB_instruction;
+    wire [4 : 0] output_register_bank_multiplexer, EX_instruction_4_0, MEM_instruction_4_0, WB_instruction_4_0;
+    wire [31 : 0] ID_instruction, IF_instruction;
 
-    wire [63 : 0] IF_old_pc, ID_old_pc, EX_old_pc, new_pc, output_pc_adder, MEM_output_data_memory, WB_output_data_memory, output_alu,  output_alu_multiplexer, WB_input_data_register, output_shift_unit, output_shift_unit_adder;
+    wire [10 : 0] EX_instruction_31_21;
+
+    wire [63 : 0] IF_old_pc, ID_old_pc, EX_old_pc, new_pc, output_pc_adder, MEM_output_data_memory, WB_output_data_memory,  output_alu_multiplexer, WB_input_data_register, output_shift_unit;
 
     reg pc_reset;
 
@@ -42,7 +44,7 @@ module CPU_Pipelined ();
 
     Multiplexer pc_multiplexer (
         .input_data_1(output_pc_adder),
-        .input_data_2(output_shift_unit_adder),
+        .input_data_2(EX_output_shift_unit_adder),
         .input_select(MEM_branch & MEM_zero_alu),
         .output_data(new_pc)
     );
@@ -99,7 +101,7 @@ module CPU_Pipelined ();
         .write(WB_reg_write),
         .input_address_1(ID_instruction[9 : 5]),
         .input_address_2(output_register_bank_multiplexer),
-        .input_address_3(WB_instruction[4 : 0]),
+        .input_address_3(WB_instruction_4_0),
         .input_data(WB_input_data_register),
         .output_data_1(ID_reg_data_1),
         .output_data_2(ID_reg_data_2)
@@ -122,7 +124,7 @@ module CPU_Pipelined ();
             EX_reg_write, EX_mem_to_reg,              // WB
             EX_branch, EX_mem_read, EX_mem_write,     // M
             EX_alu_op_0, EX_alu_op_1, EX_alu_src      // EX
-            , EX_old_pc, EX_reg_data_1, EX_reg_data_2, EX_output_sign_extend, EX_instruction[31 : 21], EX_instruction[4 : 0]})
+            , EX_old_pc, EX_reg_data_1, EX_reg_data_2, EX_output_sign_extend, EX_instruction_31_21, EX_instruction_4_0})
    );
 
     // EX STAGE
@@ -130,7 +132,7 @@ module CPU_Pipelined ();
     ALUControl alu_control_unit (
         .ALUOp0(EX_alu_op_0),
         .ALUOp1(EX_alu_op_1),
-        .instruction_part(EX_instruction[31 : 21]),
+        .instruction_part(EX_instruction_31_21),
         .operation_code(alu_opcode)
     );
 
@@ -166,11 +168,11 @@ module CPU_Pipelined ();
         .new_output({
             EX_reg_write, EX_mem_to_reg,              // WB
             EX_branch, EX_mem_read, EX_mem_write     // M
-            , EX_output_shift_unit_adder, EX_zero_alu, EX_output_alu, EX_reg_data_2, EX_instruction[4 : 0]}),
+            , EX_output_shift_unit_adder, EX_zero_alu, EX_output_alu, EX_reg_data_2, EX_instruction_4_0}),
         .old_output({
             MEM_reg_write, MEM_mem_to_reg,              // WB
             MEM_branch, MEM_mem_read, MEM_mem_write     // M
-            , MEM_output_shift_unit_adder, MEM_zero_alu, MEM_output_alu, MEM_reg_data_2, MEM_instruction[4 : 0]})
+            , MEM_output_shift_unit_adder, MEM_zero_alu, MEM_output_alu, MEM_reg_data_2, MEM_instruction_4_0})
     );
 
     // MEM STAGE
@@ -189,10 +191,10 @@ module CPU_Pipelined ();
         .reset(pc_reset),
         .new_output({
             MEM_reg_write, MEM_mem_to_reg              // WB
-            , MEM_output_data_memory, MEM_output_alu, MEM_instruction[4 : 0]}),
+            , MEM_output_data_memory, MEM_output_alu, MEM_instruction_4_0}),
         .old_output({
             WB_reg_write, WB_mem_to_reg              // WB
-            , WB_output_data_memory, WB_output_alu, WB_instruction[4 : 0]})
+            , WB_output_data_memory, WB_output_alu, WB_instruction_4_0})
     );
 
 
