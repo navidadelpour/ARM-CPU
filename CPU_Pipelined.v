@@ -2,7 +2,7 @@
 
 module CPU_Pipelined ();
 
-    wire clock, EX_zero_alu, MEM_zero_alu;
+    wire clock, EX_zero_alu, MEM_zero_alu, MEM_unconditional_branch, ID_unconditional_branch, EX_unconditional_branch, MEM_unconditional_branch;
 
     wire reg_to_loc, ID_alu_src, ID_mem_to_reg, ID_reg_write, ID_mem_read, ID_mem_write, ID_branch, ID_alu_op_1, ID_alu_op_0;
 
@@ -45,7 +45,7 @@ module CPU_Pipelined ();
     Multiplexer pc_multiplexer (
         .input_data_1(output_pc_adder),
         .input_data_2(EX_output_shift_unit_adder),
-        .input_select(MEM_branch & MEM_zero_alu),
+        .input_select((MEM_branch & MEM_zero_alu) | MEM_unconditional_branch),
         .output_data(new_pc)
     );
 
@@ -86,7 +86,8 @@ module CPU_Pipelined ();
         .MemWrite(ID_mem_write), 
         .Branch(ID_branch), 
         .ALUOp1(ID_alu_op_1),
-        .ALUOp0(ID_alu_op_0)
+        .ALUOp0(ID_alu_op_0),
+        .unconditional_branch(ID_MEM_unconditional_branch)
     );
 
     Multiplexer # (.n(5)) register_bank_multiplexer (
@@ -116,11 +117,13 @@ module CPU_Pipelined ();
         .clock(clock),
         .reset(pc_reset),
         .new_output({
+            ID_unconditional_branch,
             ID_reg_write, ID_mem_to_reg,              // WB
             ID_branch, ID_mem_read, ID_mem_write,     // M
             ID_alu_op_0, ID_alu_op_1, ID_alu_src      // EX
             , ID_old_pc, ID_reg_data_1, ID_reg_data_2, ID_output_sign_extend, ID_instruction[31 : 21], ID_instruction[4 : 0]}),
         .old_output({
+            EX_unconditional_branch,
             EX_reg_write, EX_mem_to_reg,              // WB
             EX_branch, EX_mem_read, EX_mem_write,     // M
             EX_alu_op_0, EX_alu_op_1, EX_alu_src      // EX
@@ -166,10 +169,12 @@ module CPU_Pipelined ();
         .clock(clock),
         .reset(pc_reset),
         .new_output({
+            EX_unconditional_branch,
             EX_reg_write, EX_mem_to_reg,              // WB
             EX_branch, EX_mem_read, EX_mem_write     // M
             , EX_output_shift_unit_adder, EX_zero_alu, EX_output_alu, EX_reg_data_2, EX_instruction_4_0}),
         .old_output({
+            MEM_unconditional_branch,
             MEM_reg_write, MEM_mem_to_reg,              // WB
             MEM_branch, MEM_mem_read, MEM_mem_write     // M
             , MEM_output_shift_unit_adder, MEM_zero_alu, MEM_output_alu, MEM_reg_data_2, MEM_instruction_4_0})
