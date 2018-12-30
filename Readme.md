@@ -19,7 +19,7 @@ Digital Design Lab project
 <li><strong>ControlUnit: </strong>for controling the other modules functionality</li>
 <li><strong>DataMemory: </strong>D-cache</li>
 <li><strong>InstructionMemory: </strong>I-cache</li>
-<li><strong>Multiplexer</strong></li>
+<li><strong>Multiplexer: </strong>a 2 to 1 multiplexer</li>
 <li><strong>Register: </strong>a simple register that holds data</li>
 <li><strong>RegisterBank: </strong>contains 32 registers</li>
 <li><strong>ShiftUnit: </strong>shifts by 2</li>
