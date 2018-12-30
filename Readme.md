@@ -2,12 +2,12 @@
 Digital Design Lab project
   
   <p>We are computer engineering students from <strong>Kharazmi University Of Tehran</strong></p>
-  <p>This project is for <strong>Digital Design Labaratory</strong> in Fall 2018 class presented by proffesor <strong>Laali</strong> @mlaali</p>
+  <p>This project is for <strong>Digital Design Labaratory</strong> in Fall 2018 class presented by proffesor <strong>Laali</strong> (@mlaali)</p>
   <p>Our team includes  <strong>Saleh Bayat </strong> (@saleh26) and  <strong>Navid Adelpour </strong> (@navidadelpour)</p>
-  <p>In this project we implemented a simple ARM CPU with <strong>verilog<strong> language</p>
-  <p>We used "computer organization design interface architecture" wrote by David A. Patterson as a refference</p>
+  <p>In this project we implemented a simple ARM CPU with <strong>verilog</strong> language</p>
+  <p>We used <strong>"computer organization design interface architecture"</strong> wrote by <strong>David A. Patterson</strong> as a refference</p>
   
-  <h3>technical information</h3>
+  <h2>technical information</h2>
   
   <p> we used these module above for assembling the CPU-OneCycle and CPU-Pipeline<p>
   
