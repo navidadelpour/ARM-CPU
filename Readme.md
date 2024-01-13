@@ -1,27 +1,30 @@
-# ARM-CPU
-  <p>We are computer engineering students from <strong>Kharazmi University Of Tehran</strong></p>
-  <p>This project is for <strong>Digital Design Labaratory</strong> in Fall 2018 class presented by proffesor <strong>Laali</strong> (@mlaali)</p>
-  <p>Our team includes  <strong>Saleh Bayat </strong> (@saleh26) and  <strong>Navid Adelpour </strong> (@navidadelpour)</p>
-  <p>In this project we implemented a simple ARM CPU with <strong>verilog</strong> language</p>
-  <p>We used <strong>"computer organization design interface architecture"</strong> wrote by <strong>David A. Patterson</strong> as a refference</p>
-  
-  <h2>Technical information</h2>
-  
-  <p>We used these module above for assembling the CPU-OneCycle and CPU-Pipeline<p>
-  
-<ul>
-<li><strong>Adder: </strong>Simple adder</li>
-<li><strong>ALU: </strong>Simple ALU with some main operations</li>
-<li><strong>ALUControl: </strong>ALU Control Unit</li>
-<li><strong>Clock: </strong>Simple clock</li>
-<li><strong>ControlUnit: </strong>For controling the other modules functionality</li>
-<li><strong>DataMemory: </strong>D-cache</li>
-<li><strong>InstructionMemory: </strong>I-cache</li>
-<li><strong>Multiplexer: </strong>2 to 1 multiplexer</li>
-<li><strong>Register: </strong>Simple register that holds data</li>
-<li><strong>RegisterBank: </strong>Contains 32 registers</li>
-<li><strong>ShiftUnit: </strong>Shifts by 2</li>
-<li><strong>SignExtend: </strong>Extends the input 32bits data to 64bits data</li>
-<li><strong>CPU: </strong>One cycle cpu</li>
-<li><strong>CPU_Pipelined: </strong>Pipelined cpu</li>
-</ul>
+# ARM-CPU Project
+
+We are computer engineering students from **Kharazmi University of Tehran**. This project was undertaken as part of the **Digital Design Laboratory** during the Fall 2018 semester, under the guidance of Professor **Laali** (@mlaali).
+
+Our Team:
+- **Saleh Bayat** (@saleh26)
+- **Navid Adelpour** (@navidadelpour)
+
+In this project, we implemented a simple ARM CPU using the **Verilog** hardware description language. Our work draws inspiration from the book **"Computer Organization and Design: The Hardware/Software Interface"** by **David A. Patterson**.
+
+## Technical Information
+
+We utilized various modules for assembling the CPU in both the One-Cycle and Pipeline configurations:
+
+- **Adder:** Simple adder
+- **ALU:** Simple ALU with essential operations
+- **ALUControl:** ALU Control Unit
+- **Clock:** Basic clock module
+- **ControlUnit:** Controls the functionality of other modules
+- **DataMemory:** Data cache (D-cache)
+- **InstructionMemory:** Instruction cache (I-cache)
+- **Multiplexer:** 2-to-1 multiplexer
+- **Register:** Basic register holding data
+- **RegisterBank:** Collection of 32 registers
+- **ShiftUnit:** Shifts data by 2
+- **SignExtend:** Extends 32-bit input data to 64 bits
+- **CPU:** One-Cycle CPU
+- **CPU_Pipelined:** Pipelined CPU
+
+These modules collectively form the ARM CPU, serving educational purposes in the context of digital design and computer organization. The implementation aligns with the concepts presented in the referenced book.
